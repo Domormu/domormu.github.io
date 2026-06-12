@@ -149,17 +149,55 @@ nav a:hover {
 }
 
 .link-grid a {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
     text-decoration: none;
+
     background: #1d1d1d;
     border: 1px solid #2f2f2f;
+
     color: #e0e0e0;
+
     padding: 20px;
     border-radius: 8px;
+
+    transition: all 0.2s ease;
 }
 
 .link-grid a:hover {
     border-color: #c8a96a;
+    transform: translateY(-2px);
+}
+
+.link-grid i {
+    font-size: 1.4rem;
+}
+/* Discord */
+.link-grid a:hover .fa-discord {
+    color: #5865F2;
+}
+
+/* YouTube */
+.link-grid a:hover .fa-youtube {
+    color: #FF0000;
+}
+
+/* Reddit */
+.link-grid a:hover .fa-reddit {
+    color: #FF4500;
+}
+
+/* Twitch */
+.link-grid a:hover .fa-twitch {
+    color: #9146FF;
+}
+
+/* Steam */
+.link-grid a:hover .fa-steam {
+    color: #66c0f4;
 }
 
 footer {
