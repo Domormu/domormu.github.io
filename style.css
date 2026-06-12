@@ -170,7 +170,7 @@ p {
 
 h1 {
     margin-bottom: 8px;
-    font-size: clamp(3.15rem, 13vw, 10.5rem);
+    font-size: clamp(3.15rem, 10.5vw, 9rem);
     line-height: 0.86;
     font-weight: 700;
     text-transform: uppercase;
@@ -473,16 +473,17 @@ h3 {
     color: #66c0f4;
 }
 
-.studio-section {
+.creator-section {
     background:
         linear-gradient(180deg, #121311, #0d0f0e);
 }
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 14px;
     margin-top: 40px;
+    max-width: 420px;
 }
 
 .contact-grid a {
@@ -582,7 +583,7 @@ h3 {
     }
 
     h1 {
-        font-size: clamp(2.85rem, 11.4vw, 4.8rem);
+        font-size: clamp(2.75rem, 11vw, 4.4rem);
     }
 
     .hero-backdrop {
