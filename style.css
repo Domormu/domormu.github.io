@@ -446,7 +446,7 @@ h3 {
 
 .link-grid {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 14px;
 }
 
@@ -500,10 +500,6 @@ h3 {
 
 .social-link:hover .fa-twitch {
     color: #9146ff;
-}
-
-.social-link:hover .fa-reddit {
-    color: #ff4500;
 }
 
 .social-link:hover .fa-steam {
