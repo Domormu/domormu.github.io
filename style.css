@@ -292,10 +292,13 @@ h3 {
         linear-gradient(180deg, #111210 0%, #151413 100%);
 }
 
+.media-heading {
+    margin-bottom: 44px;
+}
+
 .media-list {
     display: grid;
     gap: 42px;
-    margin-top: 44px;
 }
 
 .media-list:empty {
