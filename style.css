@@ -20,6 +20,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 120px;
 }
 
 body {
@@ -60,12 +61,12 @@ a {
     right: 0;
     z-index: 20;
     border-bottom: 1px solid rgba(238, 231, 220, 0.1);
-    background: rgba(8, 9, 8, 0.78);
+    background: rgba(8, 9, 8, 0.82);
     backdrop-filter: blur(16px);
 }
 
 .header-inner {
-    min-height: 72px;
+    min-height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -96,22 +97,50 @@ a {
     font-size: 1.08rem;
 }
 
-.site-nav {
+.site-nav,
+.game-subnav-inner {
     display: flex;
     align-items: center;
-    gap: 22px;
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.site-nav {
+    gap: 24px;
     font-size: 0.9rem;
 }
 
-.site-nav a {
+.site-nav a,
+.game-subnav a {
     color: var(--muted);
     text-decoration: none;
 }
 
 .site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav a:focus-visible,
+.game-subnav a:hover,
+.game-subnav a:focus-visible {
     color: var(--text);
+}
+
+.game-subnav {
+    border-top: 1px solid rgba(238, 231, 220, 0.07);
+    background: rgba(8, 9, 8, 0.48);
+}
+
+.game-subnav-inner {
+    min-height: 38px;
+    gap: 18px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.game-subnav a {
+    color: var(--dim);
+}
+
+.game-subnav a:first-child {
+    color: var(--brass-bright);
 }
 
 .hero {
@@ -143,7 +172,7 @@ a {
     min-height: 100svh;
     display: grid;
     align-items: center;
-    padding: 102px 0 72px;
+    padding: 132px 0 72px;
 }
 
 .hero-copy {
@@ -276,12 +305,14 @@ h3 {
     align-items: start;
 }
 
-.section-copy {
+.section-copy,
+.faq-list {
     color: var(--muted);
     font-size: 1.06rem;
 }
 
-.section-copy p:last-child {
+.section-copy p:last-child,
+.faq-item:last-child p {
     margin-bottom: 0;
 }
 
@@ -329,6 +360,31 @@ h3 {
     margin: 12px 0 0;
     color: var(--muted);
     font-size: 0.98rem;
+}
+
+.faq-section {
+    background: #111210;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.faq-list {
+    display: grid;
+    gap: 26px;
+}
+
+.faq-item {
+    padding-bottom: 26px;
+    border-bottom: 1px solid rgba(238, 231, 220, 0.11);
+}
+
+.faq-item:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.faq-item p {
+    margin-bottom: 0;
 }
 
 .community-section {
@@ -485,27 +541,40 @@ h3 {
 }
 
 @media (max-width: 720px) {
+    html {
+        scroll-padding-top: 150px;
+    }
+
     .container {
         width: min(100% - 28px, 1280px);
     }
 
     .header-inner {
         min-height: auto;
-        padding: 15px 0;
+        padding: 15px 0 12px;
         align-items: flex-start;
         flex-direction: column;
         gap: 14px;
     }
 
-    .site-nav {
+    .site-nav,
+    .game-subnav-inner {
         width: 100%;
         justify-content: space-between;
         gap: 8px;
+    }
+
+    .site-nav {
         font-size: 0.76rem;
     }
 
+    .game-subnav-inner {
+        min-height: 36px;
+        font-size: 0.72rem;
+    }
+
     .hero-grid {
-        padding-top: 138px;
+        padding-top: 168px;
     }
 
     .hero-copy {
