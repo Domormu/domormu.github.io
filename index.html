@@ -42,25 +42,27 @@
 <body>
     <header class="site-header">
         <div class="container header-inner">
-            <a class="brand" href="#top" aria-label="Domormu home">
+            <a class="brand" href="#about" aria-label="Domormu home">
                 <span class="brand-mark">D</span>
                 <span class="brand-text">Domormu</span>
             </a>
 
             <nav class="site-nav" aria-label="Primary navigation">
-                <a href="#about">Imperium Mortis</a>
+                <button class="nav-button game-nav-trigger" type="button" aria-expanded="false" aria-controls="game-subnav">
+                    Imperium Mortis
+                    <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+                </button>
                 <a href="#community">Community</a>
                 <a href="#creator">Creator</a>
             </nav>
         </div>
 
-        <nav class="game-subnav" aria-label="Imperium Mortis navigation">
+        <div id="game-subnav" class="game-subnav" aria-label="Imperium Mortis navigation">
             <div class="container game-subnav-inner">
                 <a href="#about">About</a>
                 <a href="#media">Media</a>
-                <a href="#faq">FAQ</a>
             </div>
-        </nav>
+        </div>
     </header>
 
     <main id="top">
@@ -78,7 +80,7 @@
                     </p>
 
                     <div class="hero-actions" aria-label="Imperium Mortis links">
-                        <a class="button primary" href="#top" aria-label="Steam page coming soon">
+                        <a class="button primary" href="#about" aria-label="Steam page coming soon">
                             <i class="fa-brands fa-steam" aria-hidden="true"></i>
                             Steam Coming Soon
                         </a>
@@ -111,41 +113,6 @@
             <div class="container media-list" aria-label="Screenshots and videos"></div>
         </section>
 
-        <section id="faq" class="section faq-section">
-            <div class="container split">
-                <div>
-                    <p class="eyebrow">FAQ</p>
-                    <h2>Questions that come up first.</h2>
-                </div>
-                <div class="faq-list">
-                    <article class="faq-item">
-                        <h3>What is Imperium Mortis?</h3>
-                        <p>
-                            Imperium Mortis is a dark fantasy sandbox RTS/RPG about surviving,
-                            commanding, building, and trying to matter in a world that does not
-                            begin with you.
-                        </p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3>Who is making it?</h3>
-                        <p>
-                            Imperium Mortis is being developed by Domormu, a solo independent
-                            developer.
-                        </p>
-                    </article>
-
-                    <article class="faq-item">
-                        <h3>Where can I follow development?</h3>
-                        <p>
-                            Discord is the main community for now. Steam is coming later, once
-                            the public page is ready.
-                        </p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
         <section id="community" class="section community-section">
             <div class="container">
                 <div class="section-heading">
@@ -154,7 +121,7 @@
                 </div>
 
                 <div class="link-grid">
-                    <a href="#top" class="social-link" aria-label="Steam page coming soon">
+                    <a href="#about" class="social-link" aria-label="Steam page coming soon">
                         <i class="fa-brands fa-steam" aria-hidden="true"></i>
                         <span>Steam</span>
                         <small>Coming soon</small>
@@ -242,5 +209,36 @@
             <a href="mailto:contact@domormu.com">contact@domormu.com</a>
         </div>
     </footer>
+
+    <script>
+        const navTrigger = document.querySelector('.game-nav-trigger');
+        const subnav = document.querySelector('#game-subnav');
+
+        function closeGameNav() {
+            document.body.classList.remove('game-nav-open');
+            navTrigger.setAttribute('aria-expanded', 'false');
+        }
+
+        navTrigger.addEventListener('click', () => {
+            const isOpen = document.body.classList.toggle('game-nav-open');
+            navTrigger.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        subnav.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', closeGameNav);
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.site-header')) {
+                closeGameNav();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeGameNav();
+            }
+        });
+    </script>
 </body>
 </html>
