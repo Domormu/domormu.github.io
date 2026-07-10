@@ -287,6 +287,7 @@ h3 {
 }
 
 .media-section {
+    padding-block: clamp(56px, 6vw, 82px);
     background:
         radial-gradient(circle at 80% 12%, rgba(126, 144, 146, 0.12), transparent 28%),
         linear-gradient(180deg, #111210 0%, #151413 100%);
