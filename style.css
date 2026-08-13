@@ -315,7 +315,12 @@ h3 {
     background: rgba(8, 9, 8, 0.42);
 }
 
-.media-frame img,
+.media-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 .media-frame iframe,
 .media-frame video {
     display: block;
