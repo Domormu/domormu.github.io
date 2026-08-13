@@ -19,6 +19,7 @@
     <title>Mortalis | Dark Fantasy Sandbox RTS/RPG by Domormu</title>
 
     <link rel="stylesheet" href="style.css">
+    <script src="media-carousel.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <script type="application/ld+json">
@@ -95,42 +96,76 @@
         </section>
 
         <section id="media" class="section media-section">
-            <div class="container split media-heading">
-                <div>
-                    <p class="eyebrow">Media</p>
-                    <h2>Pre-alpha screenshots.</h2>
-                </div>
-                <div aria-hidden="true"></div>
+            <div class="container media-heading">
+                <p class="eyebrow">Media</p>
             </div>
 
-            <div class="container media-list" aria-label="Screenshots and videos">
-                <article class="media-item">
-                    <h3>Open World</h3>
-                    <div class="media-frame">
-                        <img
-                            src="assets/mortalis-lakeview-pre-alpha.jpg"
-                            alt="A lone character overlooking a lake and open wilderness in Mortalis"
-                            width="1512"
-                            height="838"
-                            loading="lazy"
-                            decoding="async">
-                    </div>
-                    <p class="media-caption">Pre-alpha environment work.</p>
-                </article>
+            <div class="container media-carousel" data-carousel aria-label="Mortalis screenshots">
+                <div class="media-stage">
+                    <div
+                        class="media-viewport"
+                        data-carousel-viewport
+                        tabindex="0"
+                        aria-label="Screenshot carousel">
+                        <figure class="media-slide" data-carousel-slide>
+                            <div class="media-frame">
+                                <img
+                                    src="assets/mortalis-lakeview-pre-alpha.jpg"
+                                    alt="A lone character overlooking a lake and open wilderness in Mortalis"
+                                    width="1512"
+                                    height="838"
+                                    loading="lazy"
+                                    decoding="async">
+                            </div>
+                            <figcaption class="media-slide-caption"></figcaption>
+                        </figure>
 
-                <article class="media-item">
-                    <h3>Weather</h3>
-                    <div class="media-frame">
-                        <img
-                            src="assets/mortalis-weather-pre-alpha.jpg"
-                            alt="A character looking across the wilderness during rainfall in Mortalis"
-                            width="1510"
-                            height="839"
-                            loading="lazy"
-                            decoding="async">
+                        <figure class="media-slide" data-carousel-slide>
+                            <div class="media-frame">
+                                <img
+                                    src="assets/mortalis-weather-pre-alpha.jpg"
+                                    alt="A character looking across the wilderness during rainfall in Mortalis"
+                                    width="1510"
+                                    height="839"
+                                    loading="lazy"
+                                    decoding="async">
+                            </div>
+                            <figcaption class="media-slide-caption"></figcaption>
+                        </figure>
                     </div>
-                    <p class="media-caption">Pre-alpha weather and atmosphere work.</p>
-                </article>
+
+                    <button
+                        class="media-arrow media-arrow-previous"
+                        type="button"
+                        data-carousel-previous
+                        aria-label="Previous screenshot">
+                        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                    </button>
+                    <button
+                        class="media-arrow media-arrow-next"
+                        type="button"
+                        data-carousel-next
+                        aria-label="Next screenshot">
+                        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <p class="media-caption" data-carousel-caption aria-live="polite"></p>
+
+                <div class="media-dots" role="group" aria-label="Choose screenshot">
+                    <button
+                        class="media-dot"
+                        type="button"
+                        data-carousel-dot
+                        aria-label="Show screenshot 1"
+                        aria-current="true"></button>
+                    <button
+                        class="media-dot"
+                        type="button"
+                        data-carousel-dot
+                        aria-label="Show screenshot 2"
+                        aria-current="false"></button>
+                </div>
             </div>
         </section>
 
