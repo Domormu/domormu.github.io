@@ -129,12 +129,9 @@ a {
     position: absolute;
     inset: 0;
     background:
-        linear-gradient(90deg, rgba(8, 9, 8, 0.94) 0%, rgba(8, 9, 8, 0.74) 32%, rgba(8, 9, 8, 0.25) 66%, rgba(8, 9, 8, 0.56) 100%),
-        linear-gradient(180deg, rgba(8, 9, 8, 0.18) 0%, rgba(8, 9, 8, 0.7) 100%),
-        radial-gradient(circle at 78% 34%, rgba(126, 144, 146, 0.24), transparent 18%),
-        radial-gradient(circle at 68% 54%, rgba(192, 154, 85, 0.12), transparent 12%),
-        radial-gradient(circle at 18% 72%, rgba(127, 47, 43, 0.17), transparent 20%),
-        linear-gradient(120deg, #070807 0%, #111514 42%, #1b1a17 68%, #0a0b0a 100%);
+        linear-gradient(90deg, rgba(8, 9, 8, 0.96) 0%, rgba(8, 9, 8, 0.8) 35%, rgba(8, 9, 8, 0.24) 67%, rgba(8, 9, 8, 0.38) 100%),
+        linear-gradient(180deg, rgba(8, 9, 8, 0.08) 0%, rgba(8, 9, 8, 0.68) 100%),
+        url("assets/mortalis-hero-dusk.jpg") center 46% / cover no-repeat;
     transform: scale(1.01);
 }
 
@@ -287,7 +284,6 @@ h3 {
 }
 
 .media-section {
-    padding-block: clamp(56px, 6vw, 82px);
     background:
         radial-gradient(circle at 80% 12%, rgba(126, 144, 146, 0.12), transparent 28%),
         linear-gradient(180deg, #111210 0%, #151413 100%);
@@ -527,10 +523,9 @@ h3 {
 
     .hero-backdrop {
         background:
-            linear-gradient(180deg, rgba(8, 9, 8, 0.88) 0%, rgba(8, 9, 8, 0.56) 40%, rgba(8, 9, 8, 0.92) 100%),
-            radial-gradient(circle at 70% 34%, rgba(126, 144, 146, 0.22), transparent 22%),
-            radial-gradient(circle at 22% 74%, rgba(127, 47, 43, 0.16), transparent 24%),
-            linear-gradient(135deg, #070807, #151817 58%, #0a0b0a);
+            linear-gradient(180deg, rgba(8, 9, 8, 0.7) 0%, rgba(8, 9, 8, 0.52) 38%, rgba(8, 9, 8, 0.9) 100%),
+            linear-gradient(90deg, rgba(8, 9, 8, 0.82), rgba(8, 9, 8, 0.28)),
+            url("assets/mortalis-hero-dusk.jpg") 68% center / cover no-repeat;
     }
 
     .hero-actions,
