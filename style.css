@@ -188,9 +188,23 @@ h1 {
     border: 0;
 }
 
-.hero-title {
+.hero-brand-lockup {
+    position: relative;
     width: min(920px, 100%);
     margin-bottom: 14px;
+}
+
+.hero-brand-lockup > .eyebrow {
+    position: absolute;
+    top: clamp(4px, 0.8vw, 12px);
+    left: 0;
+    z-index: 1;
+    margin: 0;
+}
+
+.hero-title {
+    width: 100%;
+    margin: 0;
     line-height: 0;
     text-shadow: none;
 }
