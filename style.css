@@ -720,6 +720,11 @@ h3 {
         font-size: clamp(2.75rem, 11vw, 4.4rem);
     }
 
+    .hero-brand-lockup > .eyebrow {
+        font-size: 0.68rem;
+        letter-spacing: 0.13em;
+    }
+
     .hero-backdrop {
         background:
             linear-gradient(180deg, rgba(8, 9, 8, 0.7) 0%, rgba(8, 9, 8, 0.52) 38%, rgba(8, 9, 8, 0.9) 100%),
