@@ -10,7 +10,6 @@
     const previous = carousel.querySelector("[data-carousel-previous]");
     const next = carousel.querySelector("[data-carousel-next]");
     const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
-    const caption = carousel.querySelector("[data-carousel-caption]");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let activeIndex = 0;
     let physicalIndex = 0;
@@ -42,7 +41,9 @@
 
     const updateControls = () => {
         physicalSlides.forEach((slide, index) => {
-            slide.classList.toggle("is-active", index === physicalIndex);
+            const isActive = index === physicalIndex;
+            slide.classList.toggle("is-active", isActive);
+            slide.setAttribute("aria-hidden", isActive ? "false" : "true");
         });
 
         previous.disabled = originalSlides.length < 2;
@@ -51,11 +52,6 @@
         dots.forEach((dot, index) => {
             dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
         });
-
-        caption.textContent = originalSlides[activeIndex]
-            .querySelector(".media-slide-caption")
-            .textContent
-            .trim();
     };
 
     const scrollToPhysical = (index, behavior = reduceMotion ? "auto" : "smooth") => {
@@ -153,3 +149,4 @@
         scrollToPhysical(physicalIndex, "auto");
     });
 })();
+
