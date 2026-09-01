@@ -414,15 +414,6 @@ h3 {
     object-fit: cover;
 }
 
-.media-slide-caption {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-}
-
 .media-arrow {
     position: absolute;
     top: 50%;
@@ -464,15 +455,6 @@ h3 {
 
 .media-arrow-next {
     right: 18px;
-}
-
-.media-caption {
-    min-height: 1.55em;
-    max-width: 760px;
-    margin: 12px auto 0;
-    color: var(--muted);
-    font-size: 0.98rem;
-    text-align: center;
 }
 
 .media-dots {
@@ -528,6 +510,73 @@ h3 {
 
     .media-arrow-next {
         right: 8px;
+    }
+}
+
+/* Branded not-found page */
+.error-page {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    background:
+        linear-gradient(90deg, rgba(8, 9, 8, 0.96), rgba(8, 9, 8, 0.72)),
+        linear-gradient(180deg, rgba(8, 9, 8, 0.26), rgba(8, 9, 8, 0.94)),
+        url("assets/mortalis-hero-dusk.jpg") center 46% / cover fixed no-repeat;
+}
+
+.error-page .site-header {
+    position: relative;
+}
+
+.not-found-main {
+    flex: 1;
+    display: grid;
+    align-items: center;
+    padding: 48px 0;
+}
+
+.not-found-panel {
+    width: min(720px, 100%);
+    padding: clamp(30px, 5vw, 48px);
+    border: 1px solid rgba(238, 231, 220, 0.15);
+    background: rgba(8, 9, 8, 0.82);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.46);
+    backdrop-filter: blur(12px);
+}
+
+.not-found-code {
+    margin: 0 0 8px;
+    color: var(--brass-bright);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.not-found-panel h1 {
+    max-width: 640px;
+    margin-bottom: 22px;
+    font-size: clamp(3rem, 7vw, 5.3rem);
+    line-height: 0.9;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.not-found-copy {
+    max-width: 590px;
+    margin-bottom: 30px;
+    color: var(--muted);
+    font-size: clamp(1.05rem, 2vw, 1.24rem);
+}
+
+@media (max-width: 720px) {
+    .not-found-main {
+        padding: 36px 0;
+    }
+
+    .not-found-panel {
+        padding: 28px 24px;
     }
 }
 
@@ -748,3 +797,4 @@ h3 {
         flex-direction: column;
     }
 }
+
