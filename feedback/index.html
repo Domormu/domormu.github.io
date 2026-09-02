@@ -55,6 +55,7 @@
             <section class="feedback-shell" aria-label="Mortalis feedback form">
                 <iframe
                     class="feedback-frame"
+                    id="mortalis-feedback-form"
                     data-tally-src="https://tally.so/embed/RG9VYJ?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1&amp;source=website"
                     loading="lazy"
                     width="100%"
@@ -65,7 +66,7 @@
                     title="Mortalis feedback form"></iframe>
                 <div class="feedback-fallback">
                     <p>If the form does not appear, you can open it directly in a new tab.</p>
-                    <a href="https://tally.so/r/RG9VYJ?source=website" target="_blank" rel="noopener noreferrer">
+                    <a id="mortalis-feedback-fallback" href="https://tally.so/r/RG9VYJ?source=website" target="_blank" rel="noopener noreferrer">
                         Open feedback form
                     </a>
                 </div>
@@ -88,5 +89,33 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        (() => {
+            const allowedFields = ["source", "build", "platform", "channel"];
+            const incoming = new URLSearchParams(window.location.search);
+            const formParams = new URLSearchParams({
+                alignLeft: "1",
+                hideTitle: "1",
+                transparentBackground: "1",
+                dynamicHeight: "1",
+                source: "website"
+            });
+            const directParams = new URLSearchParams({ source: "website" });
+
+            allowedFields.forEach((field) => {
+                const value = incoming.get(field);
+                if (!value) return;
+                formParams.set(field, value.slice(0, 120));
+                directParams.set(field, value.slice(0, 120));
+            });
+
+            const frame = document.getElementById("mortalis-feedback-form");
+            if (frame) frame.dataset.tallySrc = "https://tally.so/embed/RG9VYJ?" + formParams.toString();
+
+            const fallback = document.getElementById("mortalis-feedback-fallback");
+            if (fallback) fallback.href = "https://tally.so/r/RG9VYJ?" + directParams.toString();
+        })();
+    </script>
 </body>
 </html>
