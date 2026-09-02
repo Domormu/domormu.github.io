@@ -884,7 +884,7 @@ h3 {
 .feedback-frame {
     display: block;
     width: 100%;
-    min-height: 720px;
+    min-height: 420px;
     border: 0;
     background: #f7f5f0;
 }
@@ -933,7 +933,7 @@ h3 {
     }
 
     .feedback-frame {
-        min-height: 760px;
+        min-height: 520px;
     }
 
     .feedback-fallback {
