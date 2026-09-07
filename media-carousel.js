@@ -1,152 +1,112 @@
 (() => {
     const carousel = document.querySelector("[data-carousel]");
-
-    if (!carousel) {
-        return;
-    }
+    if (!carousel) return;
 
     const viewport = carousel.querySelector("[data-carousel-viewport]");
-    const originalSlides = Array.from(carousel.querySelectorAll("[data-carousel-slide]"));
+    const allSlides = [...carousel.querySelectorAll("[data-carousel-slide]")];
     const previous = carousel.querySelector("[data-carousel-previous]");
     const next = carousel.querySelector("[data-carousel-next]");
-    const dots = Array.from(carousel.querySelectorAll("[data-carousel-dot]"));
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dotGroup = carousel.querySelector("[data-media-dots]");
+    const status = carousel.querySelector("[data-media-status]");
+    const original = carousel.querySelector("[data-media-original]");
+    const filters = [...document.querySelectorAll("[data-media-filter]")];
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let slides = allSlides;
+    let dots = [];
     let activeIndex = 0;
-    let physicalIndex = 0;
-    let physicalSlides = originalSlides;
-    let scrollFrame;
+    let requestedIndex = null;
+    let categoryLabel = "All";
     let settleTimer;
 
-    originalSlides.forEach((slide, index) => {
-        slide.dataset.logicalIndex = index;
-    });
-
-    if (originalSlides.length > 1) {
-        const before = originalSlides[originalSlides.length - 1].cloneNode(true);
-        const after = originalSlides[0].cloneNode(true);
-
-        before.dataset.carouselClone = "";
-        after.dataset.carouselClone = "";
-        before.setAttribute("aria-hidden", "true");
-        after.setAttribute("aria-hidden", "true");
-        viewport.prepend(before);
-        viewport.append(after);
-
-        physicalSlides = Array.from(viewport.querySelectorAll("[data-carousel-slide]"));
-        physicalIndex = 1;
-    }
-
-    const slideCenter = (slide) => slide.offsetLeft + (slide.offsetWidth / 2);
-    const viewportCenter = () => viewport.scrollLeft + (viewport.clientWidth / 2);
-
-    const updateControls = () => {
-        physicalSlides.forEach((slide, index) => {
-            const isActive = index === physicalIndex;
-            slide.classList.toggle("is-active", isActive);
-            slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+    const update = () => {
+        slides.forEach((slide, index) => {
+            slide.classList.toggle("is-active", index === activeIndex);
+            slide.setAttribute("aria-hidden", String(index !== activeIndex));
         });
-
-        previous.disabled = originalSlides.length < 2;
-        next.disabled = originalSlides.length < 2;
-
-        dots.forEach((dot, index) => {
-            dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
-        });
+        dots.forEach((dot, index) => dot.setAttribute("aria-current", String(index === activeIndex)));
+        previous.disabled = next.disabled = slides.length < 2;
+        status.textContent = categoryLabel + " · " + (activeIndex + 1) + " / " + slides.length;
+        const image = slides[activeIndex].querySelector("img");
+        original.href = image.getAttribute("src");
+        original.setAttribute("aria-label", "View full image: " + image.alt + " (opens in a new tab)");
     };
 
-    const scrollToPhysical = (index, behavior = reduceMotion ? "auto" : "smooth") => {
-        physicalIndex = Math.max(0, Math.min(index, physicalSlides.length - 1));
-        activeIndex = Number(physicalSlides[physicalIndex].dataset.logicalIndex);
+    const goTo = (index, behavior = motion.matches ? "instant" : "smooth") => {
+        activeIndex = (index + slides.length) % slides.length;
+        requestedIndex = activeIndex;
+        const slide = slides[activeIndex];
         viewport.scrollTo({
-            left: slideCenter(physicalSlides[physicalIndex]) - (viewport.clientWidth / 2),
+            left: slide.offsetLeft + slide.offsetWidth / 2 - viewport.clientWidth / 2,
             behavior
         });
-        updateControls();
+        update();
     };
 
-    const normalizeLoop = () => {
-        if (originalSlides.length < 2) {
-            return;
-        }
-
-        if (physicalIndex === 0) {
-            physicalIndex = originalSlides.length;
-            viewport.scrollTo({
-                left: slideCenter(physicalSlides[physicalIndex]) - (viewport.clientWidth / 2),
-                behavior: "auto"
-            });
-        } else if (physicalIndex === physicalSlides.length - 1) {
-            physicalIndex = 1;
-            viewport.scrollTo({
-                left: slideCenter(physicalSlides[physicalIndex]) - (viewport.clientWidth / 2),
-                behavior: "auto"
-            });
-        }
-
-        updateControls();
+    const settle = () => {
+        window.clearTimeout(settleTimer);
+        requestedIndex = null;
+        const center = viewport.scrollLeft + viewport.clientWidth / 2;
+        activeIndex = slides.reduce((best, slide, index) =>
+            Math.abs(slide.offsetLeft + slide.offsetWidth / 2 - center) <
+            Math.abs(slides[best].offsetLeft + slides[best].offsetWidth / 2 - center)
+                ? index : best, 0);
+        update();
     };
 
-    previous.addEventListener("click", () => scrollToPhysical(physicalIndex - 1));
-    next.addEventListener("click", () => scrollToPhysical(physicalIndex + 1));
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => scrollToPhysical(index + (originalSlides.length > 1 ? 1 : 0)));
-    });
-
-    physicalSlides.forEach((slide, index) => {
-        slide.addEventListener("click", () => {
-            if (index !== physicalIndex) {
-                scrollToPhysical(index);
-            }
+    const filter = (key, label) => {
+        window.clearTimeout(settleTimer);
+        // Stop any previous smooth scroll before changing the track.
+        viewport.scrollTo({ left: viewport.scrollLeft, behavior: "instant" });
+        slides = allSlides.filter(slide => key === "all" || slide.dataset.category.split(" ").includes(key));
+        allSlides.forEach(slide => {
+            slide.hidden = !slides.includes(slide);
+            slide.classList.remove("is-active");
+            slide.setAttribute("aria-hidden", "true");
         });
-    });
+        categoryLabel = label;
+        filters.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.mediaFilter === key)));
+        dots = slides.map((slide, index) => {
+            const dot = document.createElement("button");
+            dot.type = "button";
+            dot.className = "media-dot";
+            dot.setAttribute("aria-label", "Show screenshot " + (index + 1) + ": " + slide.querySelector("img").alt);
+            dot.addEventListener("click", () => goTo(index));
+            return dot;
+        });
+        dotGroup.replaceChildren(...dots);
+        goTo(0, "instant");
+    };
 
-    viewport.addEventListener("keydown", (event) => {
-        if (event.key === "ArrowLeft") {
+    previous.addEventListener("click", () => goTo((requestedIndex ?? activeIndex) - 1));
+    next.addEventListener("click", () => goTo((requestedIndex ?? activeIndex) + 1));
+    filters.forEach(button => button.addEventListener("click", () => filter(button.dataset.mediaFilter, button.textContent)));
+    allSlides.forEach(slide => slide.addEventListener("click", () => {
+        const index = slides.indexOf(slide);
+        if (index >= 0 && index !== activeIndex) goTo(index);
+    }));
+    viewport.addEventListener("keydown", event => {
+        const actions = {
+            ArrowLeft: () => goTo((requestedIndex ?? activeIndex) - 1),
+            ArrowRight: () => goTo((requestedIndex ?? activeIndex) + 1),
+            Home: () => goTo(0),
+            End: () => goTo(slides.length - 1)
+        };
+        if (actions[event.key]) {
             event.preventDefault();
-            scrollToPhysical(physicalIndex - 1);
-        }
-
-        if (event.key === "ArrowRight") {
-            event.preventDefault();
-            scrollToPhysical(physicalIndex + 1);
+            actions[event.key]();
         }
     });
-
     viewport.addEventListener("scroll", () => {
-        window.cancelAnimationFrame(scrollFrame);
         window.clearTimeout(settleTimer);
-
-        scrollFrame = window.requestAnimationFrame(() => {
-            const center = viewportCenter();
-            const nearestIndex = physicalSlides.reduce((nearest, slide, index) => {
-                const currentDistance = Math.abs(slideCenter(slide) - center);
-                const nearestDistance = Math.abs(slideCenter(physicalSlides[nearest]) - center);
-                return currentDistance < nearestDistance ? index : nearest;
-            }, 0);
-
-            if (nearestIndex !== physicalIndex) {
-                physicalIndex = nearestIndex;
-                activeIndex = Number(physicalSlides[physicalIndex].dataset.logicalIndex);
-                updateControls();
-            }
-        });
-
-        settleTimer = window.setTimeout(normalizeLoop, 180);
+        settleTimer = window.setTimeout(settle, 180);
     }, { passive: true });
+    viewport.addEventListener("scrollend", settle);
+    new ResizeObserver(() => goTo(activeIndex, "instant")).observe(viewport);
 
-    window.addEventListener("resize", () => {
-        window.clearTimeout(settleTimer);
-        physicalIndex = originalSlides.length > 1 ? activeIndex + 1 : activeIndex;
-        viewport.scrollTo({
-            left: slideCenter(physicalSlides[physicalIndex]) - (viewport.clientWidth / 2),
-            behavior: "auto"
-        });
-        updateControls();
-    }, { passive: true });
-
-    window.requestAnimationFrame(() => {
-        scrollToPhysical(physicalIndex, "auto");
-    });
+    carousel.classList.add("is-ready");
+    document.querySelector("[data-media-filters]").hidden = false;
+    carousel.querySelector("[data-media-toolbar]").hidden = false;
+    previous.hidden = next.hidden = dotGroup.hidden = false;
+    filter("all", "All");
 })();
 

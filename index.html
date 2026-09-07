@@ -22,8 +22,8 @@
 
     <title>Mortalis | Dark Fantasy Sandbox RTS/RPG by Domormu</title>
 
-    <link rel="stylesheet" href="style.css?v=site-6">
-    <script src="media-carousel.js?v=carousel-3" defer></script>
+    <link rel="stylesheet" href="style.css?v=media-20260907">
+    <script src="media-carousel.js?v=media-20260907" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <script type="application/ld+json">
@@ -111,132 +111,88 @@
             </div>
         </section>
 
-        <section id="media" class="section media-section">
+        <section id="media" class="section media-section" aria-labelledby="media-title">
             <div class="container media-heading">
-                <p class="eyebrow">Media</p>
+                <h2 id="media-title" class="eyebrow">Media</h2>
+                <div class="media-filters" data-media-filters role="group" aria-label="Filter screenshots" hidden>
+                    <button class="media-filter" type="button" data-media-filter="all" aria-pressed="true" aria-controls="media-viewport">All</button>
+                    <button class="media-filter" type="button" data-media-filter="world" aria-pressed="false" aria-controls="media-viewport">World &amp; Weather</button>
+                    <button class="media-filter" type="button" data-media-filter="combat" aria-pressed="false" aria-controls="media-viewport">Combat &amp; Command</button>
+                    <button class="media-filter" type="button" data-media-filter="life" aria-pressed="false" aria-controls="media-viewport">Life &amp; Survival</button>
+                    <button class="media-filter" type="button" data-media-filter="stories" aria-pressed="false" aria-controls="media-viewport">Settlements &amp; Stories</button>
+                </div>
             </div>
-
-            <div
-                class="container media-carousel"
-                data-carousel
-                role="region"
-                aria-roledescription="carousel"
-                aria-label="Mortalis screenshots">
+            <div class="container media-carousel" data-carousel role="region" aria-roledescription="carousel" aria-label="Mortalis screenshots">
                 <div class="media-stage">
-                    <div
-                        class="media-viewport"
-                        data-carousel-viewport
-                        tabindex="0"
-                        aria-label="Screenshot carousel">
-                        <figure class="media-slide" data-carousel-slide>
+                    <div id="media-viewport" class="media-viewport" data-carousel-viewport tabindex="0" aria-label="Screenshot carousel. Use left and right arrow keys to browse.">
+                        <figure class="media-slide" data-carousel-slide data-category="world">
                             <div class="media-frame">
-                                <img
-                                    src="assets/mortalis-hero-dusk.jpg"
-                                    alt="A lone character standing beside a lake at dusk in Mortalis"
-                                    width="1512"
-                                    height="795"
-                                    loading="lazy"
-                                    decoding="async">
+                                <img src="assets/mortalis-torch-rain.jpg" alt="A traveler raising a burning torch over a rain-soaked valley in Mortalis" width="2560" height="1440" loading="lazy" decoding="async">
                             </div>
                         </figure>
-
-                        <figure class="media-slide" data-carousel-slide>
+                        <figure class="media-slide" data-carousel-slide data-category="combat">
                             <div class="media-frame">
-                                <img
-                                    src="assets/mortalis-world-overlook.jpg"
-                                    alt="A lone traveler overlooking a lake, forest, and distant mountains in Mortalis"
-                                    width="1920"
-                                    height="1080"
-                                    loading="lazy"
-                                    decoding="async">
+                                <img src="assets/mortalis-formation-pre-alpha.jpg" alt="A spear formation facing another group on a wilderness road in Mortalis" width="1920" height="1080" loading="lazy" decoding="async">
                             </div>
                         </figure>
-
-                        <figure class="media-slide" data-carousel-slide>
+                        <figure class="media-slide" data-carousel-slide data-category="stories">
                             <div class="media-frame">
-                                <img
-                                    src="assets/mortalis-formation-pre-alpha.jpg"
-                                    alt="A spear formation facing another group on a wilderness road in Mortalis"
-                                    width="1920"
-                                    height="1080"
-                                    loading="lazy"
-                                    decoding="async">
+                                <img src="assets/mortalis-dialogue-pre-alpha.jpg" alt="A conversation with Lady Aemilia Varentos outside an imperial hall in Mortalis" width="1920" height="1080" loading="lazy" decoding="async">
                             </div>
                         </figure>
-
-                        <figure class="media-slide" data-carousel-slide>
+                        <figure class="media-slide" data-carousel-slide data-category="life">
                             <div class="media-frame">
-                                <img
-                                    src="assets/mortalis-dialogue-pre-alpha.jpg"
-                                    alt="A conversation with Lady Aemilia Varentos outside an imperial hall in Mortalis"
-                                    width="1920"
-                                    height="1080"
-                                    loading="lazy"
-                                    decoding="async">
+                                <img src="assets/mortalis-mining.jpg" alt="A character swinging a pickaxe at a rock outcrop in Mortalis" width="2560" height="1440" loading="lazy" decoding="async">
                             </div>
                         </figure>
-
-                        <figure class="media-slide" data-carousel-slide>
+                        <figure class="media-slide" data-carousel-slide data-category="world">
                             <div class="media-frame">
-                                <img
-                                    src="assets/mortalis-settlement-pre-alpha.jpg"
-                                    alt="An overhead view of a fortified settlement and its inhabitants in Mortalis"
-                                    width="1920"
-                                    height="1080"
-                                    loading="lazy"
-                                    decoding="async">
+                                <img src="assets/mortalis-clear-overlook.jpg" alt="An armored traveler resting above a forested valley and distant mountains in Mortalis" width="2560" height="1440" loading="lazy" decoding="async">
+                            </div>
+                        </figure>
+                        <figure class="media-slide" data-carousel-slide data-category="stories">
+                            <div class="media-frame">
+                                <img src="assets/mortalis-settlement-pre-alpha.jpg" alt="An overhead view of a fortified settlement and its inhabitants in Mortalis" width="1920" height="1084" loading="lazy" decoding="async">
+                            </div>
+                        </figure>
+                        <figure class="media-slide" data-carousel-slide data-category="combat">
+                            <div class="media-frame">
+                                <img src="assets/mortalis-shield-formation.jpg" alt="Shield-bearing troops gathered near siege equipment and wooden defenses in Mortalis" width="2560" height="1440" loading="lazy" decoding="async">
+                            </div>
+                        </figure>
+                        <figure class="media-slide" data-carousel-slide data-category="life">
+                            <div class="media-frame">
+                                <img src="assets/mortalis-tesserae.jpg" alt="A friendly game of Tesserae between Maro and Hedon in Mortalis" width="2560" height="1440" loading="lazy" decoding="async">
+                            </div>
+                        </figure>
+                        <figure class="media-slide" data-carousel-slide data-category="world">
+                            <div class="media-frame">
+                                <img src="assets/mortalis-hero-dusk.jpg" alt="A lone character standing beside a lake at dusk in Mortalis" width="1511" height="790" loading="lazy" decoding="async">
+                            </div>
+                        </figure>
+                        <figure class="media-slide" data-carousel-slide data-category="life">
+                            <div class="media-frame">
+                                <img src="assets/mortalis-board-game.jpg" alt="A friendly board game between Maro and Hedon in Mortalis" width="2560" height="1440" loading="lazy" decoding="async">
+                            </div>
+                        </figure>
+                        <figure class="media-slide" data-carousel-slide data-category="world">
+                            <div class="media-frame">
+                                <img src="assets/mortalis-world-overlook.jpg" alt="A lone traveler overlooking a lake, forest, and distant mountains in Mortalis" width="1920" height="1080" loading="lazy" decoding="async">
                             </div>
                         </figure>
                     </div>
-
-                    <button
-                        class="media-arrow media-arrow-previous"
-                        type="button"
-                        data-carousel-previous
-                        aria-label="Previous screenshot">
+                    <button class="media-arrow media-arrow-previous" type="button" data-carousel-previous aria-label="Previous screenshot" hidden>
                         <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
                     </button>
-                    <button
-                        class="media-arrow media-arrow-next"
-                        type="button"
-                        data-carousel-next
-                        aria-label="Next screenshot">
+                    <button class="media-arrow media-arrow-next" type="button" data-carousel-next aria-label="Next screenshot" hidden>
                         <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
                     </button>
                 </div>
-
-                <div class="media-dots" role="group" aria-label="Choose screenshot">
-                    <button
-                        class="media-dot"
-                        type="button"
-                        data-carousel-dot
-                        aria-label="Show screenshot 1"
-                        aria-current="true"></button>
-                    <button
-                        class="media-dot"
-                        type="button"
-                        data-carousel-dot
-                        aria-label="Show screenshot 2"
-                        aria-current="false"></button>
-                    <button
-                        class="media-dot"
-                        type="button"
-                        data-carousel-dot
-                        aria-label="Show screenshot 3"
-                        aria-current="false"></button>
-                    <button
-                        class="media-dot"
-                        type="button"
-                        data-carousel-dot
-                        aria-label="Show screenshot 4"
-                        aria-current="false"></button>
-                    <button
-                        class="media-dot"
-                        type="button"
-                        data-carousel-dot
-                        aria-label="Show screenshot 5"
-                        aria-current="false"></button>
+                <div class="media-toolbar" data-media-toolbar hidden>
+                    <p class="media-status" data-media-status role="status" aria-live="polite" aria-atomic="true"></p>
+                    <a class="media-original" data-media-original href="assets/mortalis-torch-rain.jpg" target="_blank" rel="noopener">View full image <span aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
                 </div>
+                <div class="media-dots" data-media-dots role="group" aria-label="Choose screenshot" hidden></div>
             </div>
         </section>
 
